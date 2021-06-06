@@ -6,12 +6,16 @@ document.addEventListener("DOMContentLoaded", function(){
     const slideBtnPrev = document.querySelector('.control-wrap .prev'); // prev button
     const pagination = document.querySelector('.slide_pagination');
     const slideLen = slideContents.length;  // slide length
-    const slideWidth = 1800; // slide width
+    const slideWidth = 1750; // slide width
     const slideSpeed = 300; // slide speed
     const startNum = 0; // initial slide index (0 ~ 4)
+
+    const autoStatBtn = document.querySelector('.main-visual-slide_ctr');
+    const autoStatBtnimg = document.querySelector('.main-visual-slide_ctr > img');
+    
       
     slideList.style.width = slideWidth * (slideLen + 2) + "px";
-    
+   
     let firstChild = slideList.firstElementChild;
     let lastChild = slideList.lastElementChild;
     let clonedFirst = firstChild.cloneNode(true);
@@ -35,6 +39,73 @@ document.addEventListener("DOMContentLoaded", function(){
     let curIndex = startNum; // current slide index (except copied slide)
     let curSlide = slideContents[curIndex]; // current slide dom
     curSlide.classList.add('slide_active');
+
+    let isStop = false;
+    let auto ="";
+
+    function autistart (){
+        if(!isStop) {
+            //console.log("자동시작");
+            if (curIndex <= slideLen - 1) {
+                slideList.style.transition = slideSpeed + "ms";
+                slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
+            }
+            if (curIndex === slideLen - 1) {
+                setTimeout(function() {
+                    slideList.style.transition = "0ms";
+                    slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
+                }, slideSpeed);
+                curIndex = -1;
+            }
+            curSlide.classList.remove('slide_active');
+            pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
+            curSlide = slideContents[++curIndex];
+            curSlide.classList.add('slide_active');
+            pageDots[curIndex].classList.add('dot_active');
+        } else {
+            //console.log("오토끝");
+            clearInterval(auto);
+        }
+    }
+    auto = setInterval(autistart, 2000);
+
+    autoStatBtn.addEventListener('click', function(){
+        if(!isStop){
+            console.log("자동시작");
+            isStop = true;
+            autoStatBtnimg.src = "images/button/btn-main-slide-play.png";
+        } else {
+            console.log("자동멈춤");
+            autoStatBtnimg.src = "images/button/btn-main-slide-stop.png";
+            isStop = false;
+            auto = setInterval(autistart, 2000);
+        }
+    });
+
+    slideBtnNext.addEventListener('mouseover', function(){
+        // console.log("마우스올림");        
+        isStop = true;
+        clearInterval(auto);
+    });
+
+    slideBtnNext.addEventListener('mouseout', function(){
+        // console.log("마우스 나감")
+        isStop = false;
+        auto = setInterval(autistart, 2000);
+    });
+
+    slideBtnPrev.addEventListener('mouseover', function(){
+        // console.log("마우스올림");        
+        isStop = true;
+        clearInterval(auto);
+    });
+
+    slideBtnPrev.addEventListener('mouseout', function(){
+        // console.log("마우스 나감")
+        isStop = false;
+        auto = setInterval(autistart, 2000);
+    });
+
 
     slideBtnNext.addEventListener('click', function() {
         if (curIndex <= slideLen - 1) {
@@ -73,69 +144,4 @@ document.addEventListener("DOMContentLoaded", function(){
         curSlide.classList.add('slide_active');
         pageDots[curIndex].classList.add('dot_active');
     });
-
-    let lele = 0;
-    let a = 0;
-
-    function moveevent(){
-        setInterval(() => {
-            // console.log("slideWidth====" + slideWidth);
-            // slideList.style.transition = slideSpeed + "ms";
-            // slideList.style.transform = "translate3d(-" + ("800" * curIndex) + "px, 0px, 0px)";
-            // a++;
-
-            // if(a == slideLen-1){
-            //     setTimeout(() => {
-            //         slideList.style.transition = "0ms";
-            //         lele = 0;
-            //         slideList.style.left = "-" + lele + "%"; 
-            //     }, 201);
-            //     a = 0;
-            // }
-        }, 1000);
-    }
-    moveevent();
-
-
-    // let currentindex = 0;
-
-    // for(i=0; i < slideLen; i++){
-    //    slideContents[i].style.left = `${i*100}%`;
-    // }
-
-    // function calcul() {
-    //     for(i=0; i<slideLen; i++) {
-    //         // console.log("slideLen ===>" +slideLen)
-    //         // console.log("slideContents[i].offsetHeight ===>" + slideContents[i].offsetHeight)
-    //         if(slideList.offsetHeight < slideContents[i].offsetHeight){
-    //             slideList.style.height = slideContents[i].offsetHeight + "px";
-    //             slideList.style.width = slideContents[i].offsetWidth + "px";
-    //         }
-    //     }
-    //     console.log("실행");
-    // }
-    // calcul();
-
-    // let lele = 0;
-    // let a = 0;
-
-    // function moveevent(){
-    //     setInterval(() => {
-    //         lele += 100;
-    //         slideList.style.transition ='.3s' ;
-    //         slideList.style.left ="-" + lele +"%";
-    //         a++;
-    
-    //         if(a == slideLen-1){
-    //             setTimeout(() => {
-    //                 slideList.style.transition = '0s';
-    //                 lele = 0;
-    //                 slideList.style.left = "-" + lele + "%"; 
-    //             }, 201);
-    //             a = 0;
-    //         }
-    //     }, 1000);
-    // }
-    // // moveevent();
-
 });
