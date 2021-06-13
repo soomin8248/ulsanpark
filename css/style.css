@@ -117,10 +117,8 @@ body{
 
 .main-intro-news .main-news-flex {width:100%;display:flex;max-width:1200px;margin:0 auto;padding: 0px 20px 85px 20px;box-sizing:border-box;}
 .main-intro-news .main-news-flex .main-news-list {width: 60%; margin-right: 40px;}
-.main-intro-news .main-news-flex .main-popup-list {width: 40%;}
+.main-intro-news .main-news-flex .main-popup-list {width: 40%; position: relative;}
 
-
-/* .main-intro-news .main-news-flex .main-news-list {margin-left: 40px;} */
 .main-intro-news .main-news-flex .main-news-list .title {display: flex; position: relative;}
 .main-intro-news .main-news-flex .main-news-list .title li {padding: 0% 4% 2% 4%;}
 .main-intro-news .main-news-flex .main-news-list .title li a {font-size: 18px; font-weight: bold;}
@@ -138,9 +136,15 @@ body{
 
 .main-intro-news .main-news-flex .main-popup-list h2 {padding: 0% 0% 8% 0%;}
 
-.m_popupzone {max-width:480px;margin:0; float:left;}
-.m_popupzone .box {position:relative;width:100%;height:100%;}
-.m_popupzone .box .popup_list {position:relative;height:100%;}
+.main-intro-news .main-news-flex .main-popup-list .slide_pagination {position: absolute;left: 86%;top: 1px;list-style: none;margin: 0;padding: 0;/* transform: translateX(-50%); */width: 27%;}
+.main-intro-news .main-news-flex .main-popup-list .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%;}
+.main-intro-news .main-news-flex .main-popup-list .slide_pagination .dot.dot_active { background: #333; }
+.main-intro-news .main-news-flex .main-popup-list .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
+.main-intro-news .main-news-flex .main-popup-list .slide_pagination li:last-child { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden;}
+.main-intro-news .main-news-flex .main-popup-list .m_popupzone {max-width:480px;margin:0;float:left;}
+.main-intro-news .main-news-flex .main-popup-list .m_popupzone .box {position:relative;width: 100%;height:100%;}
+.main-intro-news .main-news-flex .main-popup-list .m_popupzone .box .popup_list {position:relative;height:100%;}
+.main-intro-news .main-news-flex .main-popup-list .m_popupzone .box img {width: 441px;height: 226px;}
 
 /* info */
 .main-intro-info { margin: 0 auto; width: 100%; background: #fff;}
