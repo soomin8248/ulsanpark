@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
-    // const windowcon = document.querySelector('.main-visual-box');
+    const gnbli = document.querySelectorAll('.gnb-ul');
+
     const slideList = document.querySelector('.main-visual-img-box');  // Slide parent dom
     const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
     const slideBtnNext = document.querySelector('.control-wrap .next'); // next button
@@ -12,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const autoStatBtn = document.querySelector('.main-visual-slide_ctr');
     const autoStatBtnimg = document.querySelector('.main-visual-slide_ctr > img');
-    
-      
+   
+    // 슬라이드 스크립트
     slideList.style.width = slideWidth * (slideLen + 2) + "px";
    
     let firstChild = slideList.firstElementChild;
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function(){
             clearInterval(auto);
         }
     }
-    auto = setInterval(autistart, 2000);
+    auto = setInterval(autistart, 3000);
 
     autoStatBtn.addEventListener('click', function(){
         if(!isStop){
@@ -78,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(){
             console.log("자동멈춤");
             autoStatBtnimg.src = "images/button/btn-main-slide-stop.png";
             isStop = false;
-            auto = setInterval(autistart, 2000);
+            auto = setInterval(autistart, 3000);
         }
     });
 
@@ -91,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function(){
     slideBtnNext.addEventListener('mouseout', function(){
         // console.log("마우스 나감")
         isStop = false;
-        auto = setInterval(autistart, 2000);
+        auto = setInterval(autistart, 3000);
     });
 
     slideBtnPrev.addEventListener('mouseover', function(){
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(){
     slideBtnPrev.addEventListener('mouseout', function(){
         // console.log("마우스 나감")
         isStop = false;
-        auto = setInterval(autistart, 2000);
+        auto = setInterval(autistart, 3000);
     });
 
 
